@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  platform: one
+  coin: one
+  worth: 1.5
+
+two:
+  platform: two
+  coin: two
+  worth: 1.5
