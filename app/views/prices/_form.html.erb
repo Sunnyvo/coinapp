@@ -1,0 +1,9 @@
+
+<script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</script>
+<%= form_for price, remote: true, authenticity_token: true do |f| %>
+  <%= f.hidden_field :coin_id, value: "1" %>
+  <%= f.hidden_field :platform_id, value: "1" %>
+  <%= f.submit "send", class: "btn btn-primary", data: {send: "price"} %>
+<% end %>

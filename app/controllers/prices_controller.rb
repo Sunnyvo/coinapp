@@ -1,15 +1,16 @@
 class PricesController < ApplicationController
   def create
-    price = Price.new(price_params)
-    price.user = current_user
-    if price.save
+    eth_price = request_data_basecoin("ETH-USD")
+    price = Price.new(price_params: eth_price, coin_id: "1", platform_id: "1")
+    if price.save!
       ActionCable.server.broadcast 'prices',
-        price: price.content,
-        user: price.user.username
+        price: price.worth,
+        coin: price.coin.name,
+        platform: price.platform.name
       head :ok
     end
   end
   def price_params
-    params.require(:price).permit(:worth, :platform_id, :coin_id)
-  end
+    params.require(:price).permit(:platform_id, :coin_id)
+   end
 end

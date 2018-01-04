@@ -3,8 +3,8 @@ class PlatformsController < ApplicationController
   # COINBASE_CLIENT_SECRET = 'W4PY3IXWyAuBpWwVIgmvD0NRD18cUBBu'
   def show
     @platforms = Platform.all
+    @price = Price.new
     # @price = Price.new
-    @btc_newest_cb = request_data_basecoin("BTC-USD")
     @eth_newest_cb = request_data_basecoin("ETH-USD")
     @btc_newest_bt = request_data_bittrex("usdt-btc")
     @eth_newest_bt = request_data_bittrex("usdt-eth")
