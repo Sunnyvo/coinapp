@@ -1,6 +1,7 @@
 class Platform < ApplicationRecord
- has_many :coins
- has_many :prices, through: :coins
+ has_many :prices, dependent: :destroy
+ has_many :coins, through: :prices
+ validates :name, presence: true, uniqueness: true, case_sensivtive: false
 
   # def self.request_data(currency)
   #   require 'httparty'

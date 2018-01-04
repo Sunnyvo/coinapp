@@ -9,10 +9,16 @@
 coins_list = ["Bitcoin","Ethereum"]
 platforms_list = ["Coinbase", "Bittrex", "Poloniex"]
 
+
+
+platforms_list.each do |platform|
+  Platform.create!(name: platform)
+end
+
 coins_list.each do |coin|
   Coin.create!(name: coin)
 end
 
-platforms_list.each do |platform|
-  Platform.create!(name: platform)
+20.times do
+  Price.create!(worth: rand(2000),platform_id: rand(1..3),coin_id: rand(1..2))
 end

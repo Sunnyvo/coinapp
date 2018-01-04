@@ -16,6 +16,7 @@ class ApplicationController < ActionController::Base
     url = url + '/spot'
     response = HTTParty.get(url)
     worth= response.parsed_response['data']['amount']
+    return worth
   end
 
   def request_data_bittrex(currency)
@@ -23,6 +24,7 @@ class ApplicationController < ActionController::Base
     url ='https://bittrex.com/api/v1.1/public/getmarketsummary?market=' + currency
     response = HTTParty.get(url)
     worth= response.parsed_response['result'].first['Bid']
+    return worth
   end
 
   def request_data_poloniex(currency)
@@ -31,5 +33,6 @@ class ApplicationController < ActionController::Base
     url = url + '&depth=1'
     response = HTTParty.get(url)
     worth = response.parsed_response['bids'].first['0']
+    return worth
   end
 end
