@@ -2,19 +2,17 @@
 <p>Find me in app/views/platforms/show.html.erb</p>
 <h3> coin base </h3>
 <p id="btc-cb"> bitcoin newest <%= @btc_newest_cb %> </p>
-<p id="eth-cb"> bitcoin newest <%= @eth_newest_cb %> </p>
+<p id="eth-cb"> eth newest <%= @eth_newest_cb %> </p>
 
 <h3> bittrex</h3>
 <p> bitcoin newest <%= @btc_newest_bt %> </p>
-<p> bitcoin newest <%= @eth_newest_bt %> </p>
-
-<button> </button>
+<p> eth newest <%= @eth_newest_bt %> </p>
 <h3> poloniex </h3>
 <%# <p> bitcoin newest <%= @btc_newest_po%> </p> %>
 <%# <p> bitcoin newest <%= @eth_newest_po%> </p> %>
 
 
-<% render 'prices/form', price: @price %>
+<%= render 'prices/form', price: @price%>
 <script>
 
 </script>

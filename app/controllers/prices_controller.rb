@@ -1,7 +1,7 @@
 class PricesController < ApplicationController
   def create
-    eth_price = request_data_basecoin("ETH-USD")
-    price = Price.new(price_params: eth_price, coin_id: "1", platform_id: "1")
+    btc_price = request_data_basecoin("BTC-USD")
+    price = Price.new(worth: btc_price, coin_id: "1", platform_id: "1")
     if price.save!
       ActionCable.server.broadcast 'prices',
         price: price.worth,
