@@ -11,7 +11,7 @@ App.prices = App.cable.subscriptions.create('PriceChannel',{
   },
   received: function(data) {
     console.log ('I am here')
-    document.getElementById('btc-cb').innerHTML = "BTC newest: " + data.price
+    $(`#${data.platform}`).find(`#${data.coin}`).text(data.price)
   }
 })
 }

@@ -1,18 +1,25 @@
 <h1>Platforms#show</h1>
 <p>Find me in app/views/platforms/show.html.erb</p>
-<h3> coin base </h3>
-<p id="btc-cb"> bitcoin newest <%= @btc_newest_cb %> </p>
-<p id="eth-cb"> eth newest <%= @eth_newest_cb %> </p>
-
-<h3> bittrex</h3>
-<p> bitcoin newest <%= @btc_newest_bt %> </p>
-<p> eth newest <%= @eth_newest_bt %> </p>
-<h3> poloniex </h3>
+<div id="Coinbase" >
+  <h3 > coin base </h3>
+  <p> Bitcoin: <b id="Bitcoin"> <%= @btc_newest_cb %></b> </p>
+  <p> eth newest  <b id="Ethereum"> <%= @eth_newest_cb %> </b> </p>
+</div>
+<div id="Bittrex">
+  <h3> bittrex</h3>
+  <p> bitcoin newest <b id="Bitcoin"> <%= @btc_newest_bt %> </b> </p>
+  <p> eth newest <b id="Ethereum"> <%= @eth_newest_bt %> </b> </p>
+</div>
+<%# <h3> poloniex </h3> %>
 <%# <p> bitcoin newest <%= @btc_newest_po%> </p> %>
 <%# <p> bitcoin newest <%= @eth_newest_po%> </p> %>
 
-
-<%= render 'prices/form', price: @price%>
 <script>
-
+  setInterval(() => {
+   console.log('hello');
+  var xhttp = new XMLHttpRequest();
+  xhttp.open("Post", "http://localhost:3000/prices", true);
+  xhttp.send();
+  }, 15000);
+  setupPlatform();
 </script>
