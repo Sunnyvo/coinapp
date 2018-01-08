@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::API
-  protect_from_forgery with: :exception
+  # protect_from_forgery with: :exception
   helper_method :request_data_basecoin
 
   def request_data_basecoin(currency)

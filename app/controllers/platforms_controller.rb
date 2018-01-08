@@ -16,7 +16,9 @@ class PlatformsController < ApplicationController
   end
 
   def fetch_platforms
-
+    @platform= Platform.find_by_id(params[:id])
+      # platform.coins.distince
+    render json: @platform.to_json({ include: [Platform.coins_distinct(@platform)]})
     # render json: @students.to_json({ include: [ :languages, :nation_languages, :additional_skills] })
   end
 
