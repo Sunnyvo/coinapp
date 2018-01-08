@@ -21,6 +21,7 @@ class PricesController < ApplicationController
 
   end
 
+
   def price_params
     params.require(:price)
   end

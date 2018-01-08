@@ -15,5 +15,10 @@ class PlatformsController < ApplicationController
     #
   end
 
+  def fetch_platforms
+
+    # render json: @students.to_json({ include: [ :languages, :nation_languages, :additional_skills] })
+  end
+
 
 end
