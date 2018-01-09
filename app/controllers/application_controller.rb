@@ -1,21 +1,23 @@
 class ApplicationController < ActionController::API
   # protect_from_forgery with: :exception
+  # include ActionController::MimeResponds
+  include ActionController::ImplicitRender
   helper_method :request_data_basecoin
 
-  def request_data_basecoin(currency)
-    require 'httparty'
-    url ='https://api.coinbase.com/v2/prices/' + currency
-    url = url + '/spot'
-    response = HTTParty.get(url)
-    worth= response.parsed_response['data']['amount']
-  end
+  # def request_data_basecoin(currency)
+  #   require 'httparty'
+  #   url ='https://api.coinbase.com/v2/prices/' + currency
+  #   url = url + '/spot'
+  #   response = HTTParty.get(url)
+  #   worth= response.parsed_response['data']['amount']
+  # end
 
   def request_data_basecoin(currency)
     require 'httparty'
     url ='https://api.coinbase.com/v2/prices/' + currency
     url = url + '/spot'
     response = HTTParty.get(url)
-    worth= response.parsed_response['data']['amount']
+        worth= response.parsed_response['data']['amount']
     return worth
   end
 

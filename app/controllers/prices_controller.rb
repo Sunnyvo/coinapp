@@ -1,5 +1,5 @@
 class PricesController < ApplicationController
-  protect_from_forgery with: :null_session
+  # protect_from_forgery with: :null_session
   def create
     #basecoin platform
     arr_coinbase = [{api: "BTC-USD", platform: "Coinbase", coin: "Bitcoin"},{api: "ETH-USD", platform: "Coinbase", coin: "Ethereum"}];
@@ -37,4 +37,16 @@ class PricesController < ApplicationController
       end
   end
   helper_method :sub_create
+
+  def fetch_prices_coin
+    if (params[:coin] != "1" &&  params[:coin] != "2")
+      params[:coin] = "1"
+    end
+      if (params[:platform] != "1" && params[:platform] != "2" && params[:platform] != "3")
+      params[:platform] = "1"
+    end
+    prices = Price.where(platform_id: params[:platform], coin_id: params[:coin]).order("updated_at DESC").limit(5)
+    render json: prices.to_json
+    # prices = Price.where(platform_id: 1, coin_id: 1).order_by("updated_at DESC").limit(5)
+  end
 end

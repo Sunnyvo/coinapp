@@ -5,8 +5,8 @@ class Platform < ApplicationRecord
 
 
  def self.coins_distinct(platform)
-  return platform.coins.distinct
-end
+  platform.coins.distinct
+  end
   # def self.request_data(currency)
   #   require 'httparty'
   #   url=`https://api.coinbase.com/v2/prices/#{currency}/spot`
