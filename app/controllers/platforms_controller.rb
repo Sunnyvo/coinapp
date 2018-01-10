@@ -10,13 +10,6 @@ class PlatformsController < ApplicationController
 
   end
 
-  # def fetch_platforms
-  #   @platforms= Platform.all
-  #   respond_to do |format|
-  #     format.json { render json: @platforms }
-  #   end
-
-  # end
 
   def fecth_coins_platform
     puts params[:platform]

@@ -11,7 +11,7 @@ App.prices = App.cable.subscriptions.create('PriceChannel',{
   },
   received: function(data) {
     console.log ('I am here')
-    $(`#${data.platform}`).find(`#${data.coin}`).text(data.price)
+    $(`#${data.platform_id}`).find(`#${data.coin_id}`).text(data.price)
   }
 })
 }
