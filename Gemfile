@@ -30,6 +30,11 @@ gem 'coinbase'
 gem 'coinbase-exchange'
 # Use Redis adapter to run Action Cable in production
 gem 'redis', '~> 3.0'
+gem 'bcrypt', '~> 3.1.7'
+gem 'api-auth'
+gem 'devise'
+gem 'rack-cors', :require => 'rack/cors'
+gem 'simple_token_authentication', '~> 1.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

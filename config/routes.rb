@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     get 'platforms/show'
     get 'home/index'
     # get 'platforms/index'
+    resources :sessions, only: [:create, :destroy]
     resources :prices
     get '/platforms', to: 'platforms#index'
     get '/platforms/coin', to: 'platforms#fecth_coins_platform'
