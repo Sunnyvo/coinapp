@@ -5,7 +5,8 @@ from
 - [X] Coinbase: https://developers.coinbase.com/api/v2
 - [X] Bittrex: https://bittrex.com/home/api
 - [] Poloniex: https://poloniex.com/support/api/
-Time spent: **12** hours spent in total
+
+
 
 ## User Stories
 ## How to start:
