@@ -1,4 +1,5 @@
-json.platforms @platforms do |platform|
+
+json.platforms platforms do |platform|
   json.name platform.name
   json.coins platform.coins.distinct do |coin|
     json.name coin.name
