@@ -1,24 +1,31 @@
-# README
+# Project 1 - *Coin application*
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+**Coin application** is a market platforms app using the [coins Database API]
+from
+- [X] Coinbase: https://developers.coinbase.com/api/v2
+- [X] Bittrex: https://bittrex.com/home/api
+- [] Poloniex: https://poloniex.com/support/api/
+Time spent: **12** hours spent in total
 
-Things you may want to cover:
+## User Stories
+## How to start:
+**step 1**
 
-* Ruby version
+- git clone https://github.com/Sunnyvo/frontendcoinapp for frontend.
+- git clone https://github.com/Sunnyvo/coinapp for backend.
 
-* System dependencies
+**step 2**
 
-* Configuration
+- Backend
+  + bundle (update gem)
+  + Rails s (port 3000) for backend
+- Frontend
+  + npm install ( redependencies)
+  + Yarn start or npm start for Frontend
 
-* Database creation
+**step 3**
 
-* Database initialization
+- Choose the market platform that we wanna see the price.
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Video Walkthrough
