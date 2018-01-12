@@ -19,10 +19,12 @@ from
 
 - Backend
   + bundle (update gem)
+  + rails db:drop db:create db:migrate db:seed
   + Rails s (port 3000) for backend
 - Frontend
   + npm install ( redependencies)
   + Yarn start or npm start for Frontend
+  + I did not handle the componentWillmount for the token, so we need to refresh the frontend after we get the accesstoken from server.
 
 **step 3**
 
