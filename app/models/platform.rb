@@ -2,11 +2,16 @@ class Platform < ApplicationRecord
  has_many :prices, dependent: :destroy
  has_many :coins, through: :prices
  validates :name, presence: true, uniqueness: true, case_sensivtive: false
+#  searchkick
+#    scope :search_import, -> { includes(:coin, :price ) }
+  # scope :search_import, -> { includes(:coin) }
+#  def search_data
 
+#  end
 
- def self.coins_distinct(platform)
-  platform.coins.distinct
-  end
+#  def self.coins_distinct(platform)
+#   platform.coins.distinct
+#   end
   # def self.request_data(currency)
   #   require 'httparty'
   #   url=`https://api.coinbase.com/v2/prices/#{currency}/spot`

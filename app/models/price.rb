@@ -1,6 +1,124 @@
 class Price < ApplicationRecord
   belongs_to :platform
   belongs_to :coin
+  searchkick
+  scope :search_import, -> { includes(:platform, :coin)}
+  # scope :daily, -> {where('created_at >= ?', 1.day.ago)}
+  # scope :weekly, -> {where('created_at >= ?', 1.week.ago)}
+
+  # def
+  def search_data
+    {
+      created_at: created_at,
+      worth: worth,
+      platform_id: platform_id,
+      coin_id: coin_id
+    }
+  end
+  def self.return_all_data
+
+    # query = params
+    search= Price.search(
+      body_options: {
+        aggs: {
+          by_times: {
+            date_histogram: {
+              field: :created_at,
+      # ?        size: 3,
+              interval: "hour",
+
+            },
+            aggs: {
+              highest: {
+                top_hits: {
+                  sort: [
+                    {
+                      worth: {
+                        order: "desc"
+                      }
+                    }
+                  ],
+                  _source: {
+                    includes: ["worth"]
+                  },
+                  size: 1
+                }
+              },
+              lowest: {
+                top_hits: {
+                  sort: [
+                    {
+                      worth: {
+                        order: "asc"
+                      }
+                    }
+                  ],
+                  _source: {
+                    includes: ["worth"]
+                  },
+                  size: 1
+                }
+              },
+              open: {
+                top_hits: {
+                  sort: [
+                    {
+                      created_at: {
+                        order: "asc"
+                      }
+                    }
+                  ],
+                  _source: {
+                    includes: ["worth", "created_at"]
+                  },
+                  size: 1
+                }
+              },
+              close: {
+                top_hits: {
+                  sort: [
+                    {
+                      created_at: {
+                        order: "desc"
+                      }
+                    }
+                  ],
+                  _source: {
+                    includes: ["worth"]
+                  },
+                  size: 1
+                }
+              }
+            }
+          }
+        }
+      }
+    )
+
+    return [] unless search.aggregations.present?
+    block_time_agg = search.aggregations.dig("by_times", "buckets")
+    # return [] unless block_time_agg.present?
+    block_time_agg.inject([]) {|by_times, i|
+
+    by_times <<
+      if(i.dig("lowest", "hits","hits").present? )
+        Hashie::Mash.new(
+          id: i.dig("key"),
+          date: i.dig("open","hits","hits").first.dig("_source","created_at"),
+          open: i.dig("open","hits","hits").first.dig("_source","worth"),
+          high: i.dig("highest", "hits","hits").first.dig("_source","worth"),
+          low:  i.dig("lowest", "hits","hits").first.dig("_source","worth"),
+          close: i.dig("close","hits","hits").first.dig("_source","worth")
+
+          )
+      end
+    }
+    # puts a
+    # puts prices
+  end
+
+
+
   def self.request_price
     prices = []
     #basecoin platform
@@ -22,6 +140,27 @@ class Price < ApplicationRecord
     end
     return prices
   end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   def self.request_data_basecoin(currency)
     require 'httparty'
@@ -49,4 +188,6 @@ class Price < ApplicationRecord
     worth = response.parsed_response['bids'].first['0']
     return worth
   end
+
+
 end

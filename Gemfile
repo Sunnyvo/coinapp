@@ -35,6 +35,12 @@ gem 'api-auth'
 gem 'devise'
 gem 'rack-cors', :require => 'rack/cors'
 gem 'simple_token_authentication', '~> 1.0'
+gem 'searchkick'
+gem 'resque', '~> 1.25', '>= 1.25.2'
+gem 'resque-scheduler'
+gem "bunny", ">= 2.9.0"
+gem 'oj'
+gem 'hashie'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
