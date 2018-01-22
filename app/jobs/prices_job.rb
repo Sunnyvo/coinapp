@@ -1,6 +1,10 @@
+class PriceJob
+  @queue = :update_price
 
-# class PricesJob < ApplicationJob
-#   queue_as :default
+  def self.perform
+    puts 'test'
+    Price.request_price
+  end
 
 #   def perform
 #     puts 'test'
@@ -10,11 +14,12 @@
 #   end
 
 #   private
-  # def rerender_platforms
-  #     @platforms = Platform.all
-  #     ApplicationController.render(
-  #     template: "platforms/index.json.jbuilder"
-  #     )
-  # end
+#   def rerender_platforms
+#       @platforms = Platform.all
+#       ApplicationController.render(
+#       template: "platforms/index.json.jbuilder"
+#       )
+#   end
 # end
-# # PricesJob.set(wait: 15.seconds).perform_later
+# PricesJob.set(wait: 15.seconds).perform_later
+end

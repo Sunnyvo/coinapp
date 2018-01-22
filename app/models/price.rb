@@ -3,10 +3,6 @@ class Price < ApplicationRecord
   belongs_to :coin
   searchkick
   scope :search_import, -> { includes(:platform, :coin)}
-  # scope :daily, -> {where('created_at >= ?', 1.day.ago)}
-  # scope :weekly, -> {where('created_at >= ?', 1.week.ago)}
-
-  # def
   def search_data
     {
       created_at: created_at,
@@ -15,17 +11,29 @@ class Price < ApplicationRecord
       coin_id: coin_id
     }
   end
-  def self.return_all_data
 
-    # query = params
+  def self.data_of_platform_market
+    platforms = []
+    Platform.all.each do |platform|
+      coins= []
+      coins << Price.data_for_each_coin(1, platform.id)
+      coins << Price.data_for_each_coin(2, platform.id)
+
+      platforms << coins
+    end
+    return platforms
+  end
+
+  def self.data_for_each_coin(coin, platform)
+
     search= Price.search(
+      where: {coin_id: coin, platform_id: platform},
       body_options: {
         aggs: {
           by_times: {
             date_histogram: {
               field: :created_at,
-      # ?        size: 3,
-              interval: "hour",
+              interval: "1m",
 
             },
             aggs: {
@@ -97,9 +105,7 @@ class Price < ApplicationRecord
 
     return [] unless search.aggregations.present?
     block_time_agg = search.aggregations.dig("by_times", "buckets")
-    # return [] unless block_time_agg.present?
     block_time_agg.inject([]) {|by_times, i|
-
     by_times <<
       if(i.dig("lowest", "hits","hits").present? )
         Hashie::Mash.new(
@@ -109,12 +115,10 @@ class Price < ApplicationRecord
           high: i.dig("highest", "hits","hits").first.dig("_source","worth"),
           low:  i.dig("lowest", "hits","hits").first.dig("_source","worth"),
           close: i.dig("close","hits","hits").first.dig("_source","worth")
-
           )
       end
     }
-    # puts a
-    # puts prices
+
   end
 
 
