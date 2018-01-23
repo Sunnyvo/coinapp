@@ -33,7 +33,7 @@ class Price < ApplicationRecord
           by_times: {
             date_histogram: {
               field: :created_at,
-              interval: "1m",
+              interval: "5m",
 
             },
             aggs: {
