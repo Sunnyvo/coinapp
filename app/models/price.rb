@@ -124,6 +124,7 @@ class Price < ApplicationRecord
 
 
   def self.request_price
+    puts "go"
     prices = []
     #basecoin platform
     arr_coinbase = [{api: "BTC-USD", platform: "Coinbase", coin: "Bitcoin"},{api: "ETH-USD", platform: "Coinbase", coin: "Ethereum"}];

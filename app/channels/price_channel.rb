@@ -7,10 +7,12 @@ class PriceChannel < ApplicationCable::Channel
       ActionCable.server.broadcast 'prices',
         data:  ApplicationController.render(
 
-          template: "prices/index.json.jbuilder", locals: { platforms: platforms}
+          template: 'prices/index.json.jbuilder', locals: { platforms: platforms}
         )
       sleep 15
     end
+
+
 
     # while 1 do
     #   prices = Price.request_data
@@ -31,6 +33,10 @@ class PriceChannel < ApplicationCable::Channel
     #     )
     #   sleep 15
     # end
+  end
+
+  def unsubscribed
+
   end
 
 

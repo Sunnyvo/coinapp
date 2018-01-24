@@ -41,6 +41,7 @@ gem 'resque-scheduler'
 gem "bunny", ">= 2.9.0"
 gem 'oj'
 gem 'hashie'
+gem 'rubocop', require: false
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -53,6 +54,7 @@ group :development, :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
+  gem 'pry'
 end
 
 group :development do
