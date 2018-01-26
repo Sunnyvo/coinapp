@@ -11,9 +11,6 @@ module ApplicationCable
       def find_token_user
         begin
           token = request.params[:token]
-          # decoded_token = Auth.decode_token(token)
-          # user_id = decoded_token[0]["user_id"]
-          # if current_user = User.find_by(id: user_id)
           if current_user = User.find_by(authentication_token: token)
             current_user
           else

@@ -4,3 +4,14 @@ fetch_current_price:
   args:
   description: Grabs newest prices from public API of Coinbase, Bittrex & Bitfinex
 
+update_current_chart:
+  every: 5s
+  class: ChartJob
+  args:
+  description: chart for all market platform
+
+queue_current_chart:
+  every: 5s
+  class: RabbitmqJob
+  args:
+  description: queue the chart

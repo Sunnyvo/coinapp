@@ -41,6 +41,7 @@ gem 'resque-scheduler'
 gem "bunny", ">= 2.9.0"
 gem 'oj'
 gem 'hashie'
+gem 'dotenv-rails', require: 'dotenv/rails-now'
 gem 'rubocop', require: false
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -55,6 +56,8 @@ group :development, :test do
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
   gem 'pry'
+  gem 'pry-doc'
+  # gem 'pry-rails'
 end
 
 group :development do

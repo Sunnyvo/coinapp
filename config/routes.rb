@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   mount ActionCable.server => '/cable'
     get 'platforms/show'
     get 'home/index'
-    # get 'platforms/index'
     resources :sessions, only: [:create, :destroy]
     resources :prices
     get '/platforms', to: 'platforms#index'

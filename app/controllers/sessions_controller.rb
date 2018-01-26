@@ -5,7 +5,6 @@ class SessionsController < ApplicationController
       log_in(@user)
       puts current_user.authentication_token
       respond_to do |format|
-      # render json: user.as_json(only: [:email, :authentication_token]), status: :created
         format.json  {render :create,  status: :created}
       end
     else

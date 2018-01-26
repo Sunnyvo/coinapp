@@ -20,15 +20,24 @@ from
 - Backend
   + bundle (update gem)
   + rails db:drop db:create db:migrate db:seed
-  + Rails s (port 3000) for backend
+  + config .env file with CLOUDAMQPURL=""
+
+- Start these servers and workers below
+  + web: rails server -p 3000
+  + redis: redis-server
+  + worker: QUEUE=update_price rake resque:work
+  + worker: QUEUE=update_chart rake resque:work
+  + worker: QUEUE=queue_chart rake resque:work
+  + job_fetch_price: rake resque:scheduler
+
 - Frontend
   + npm install ( redependencies)
   + Yarn start or npm start for Frontend
-  + I did not handle the componentWillmount for the token, so we need to refresh the frontend after we get the accesstoken from server.
 
 **step 3**
 
 - Choose the market platform that we wanna see the price.
+- Zoom in or zoom out for the chart.
 
 
 ## Video Walkthrough

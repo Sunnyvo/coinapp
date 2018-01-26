@@ -18,7 +18,7 @@ class Price < ApplicationRecord
       coins= []
       coins << Price.data_for_each_coin(1, platform.id)
       coins << Price.data_for_each_coin(2, platform.id)
-
+      binding.dry
       platforms << coins
     end
     return platforms
@@ -33,21 +33,22 @@ class Price < ApplicationRecord
           by_times: {
             date_histogram: {
               field: :created_at,
-              interval: "5m",
-
+              interval: '5m',
+              min_doc_count: 1,
             },
+            #
             aggs: {
               highest: {
                 top_hits: {
                   sort: [
                     {
                       worth: {
-                        order: "desc"
+                        order: 'desc'
                       }
                     }
                   ],
                   _source: {
-                    includes: ["worth"]
+                    includes: ['worth']
                   },
                   size: 1
                 }
@@ -57,12 +58,12 @@ class Price < ApplicationRecord
                   sort: [
                     {
                       worth: {
-                        order: "asc"
+                        order: 'asc'
                       }
                     }
                   ],
                   _source: {
-                    includes: ["worth"]
+                    includes: ['worth']
                   },
                   size: 1
                 }
@@ -72,12 +73,12 @@ class Price < ApplicationRecord
                   sort: [
                     {
                       created_at: {
-                        order: "asc"
+                        order: 'asc'
                       }
                     }
                   ],
                   _source: {
-                    includes: ["worth", "created_at"]
+                    includes: ['worth', 'created_at']
                   },
                   size: 1
                 }
@@ -87,12 +88,12 @@ class Price < ApplicationRecord
                   sort: [
                     {
                       created_at: {
-                        order: "desc"
+                        order: 'desc'
                       }
                     }
                   ],
                   _source: {
-                    includes: ["worth"]
+                    includes: ['worth']
                   },
                   size: 1
                 }
@@ -104,17 +105,16 @@ class Price < ApplicationRecord
     )
 
     return [] unless search.aggregations.present?
-    block_time_agg = search.aggregations.dig("by_times", "buckets")
+    block_time_agg = search.aggregations.dig('by_times', 'buckets')
     block_time_agg.inject([]) {|by_times, i|
     by_times <<
-      if(i.dig("lowest", "hits","hits").present? )
+      if(i.dig('lowest', 'hits','hits').present? )
         Hashie::Mash.new(
-          id: i.dig("key"),
-          date: i.dig("open","hits","hits").first.dig("_source","created_at"),
-          open: i.dig("open","hits","hits").first.dig("_source","worth"),
-          high: i.dig("highest", "hits","hits").first.dig("_source","worth"),
-          low:  i.dig("lowest", "hits","hits").first.dig("_source","worth"),
-          close: i.dig("close","hits","hits").first.dig("_source","worth")
+          date: i.dig('open','hits','hits').first.dig('_source','created_at'),
+          open: i.dig('open','hits','hits').first.dig('_source','worth'),
+          high: i.dig('highest', 'hits','hits').first.dig('_source','worth'),
+          low:  i.dig('lowest', 'hits','hits').first.dig('_source','worth'),
+          close: i.dig('close','hits','hits').first.dig('_source','worth')
           )
       end
     }
@@ -124,13 +124,12 @@ class Price < ApplicationRecord
 
 
   def self.request_price
-    puts "go"
     prices = []
     #basecoin platform
-    arr_coinbase = [{api: "BTC-USD", platform: "Coinbase", coin: "Bitcoin"},{api: "ETH-USD", platform: "Coinbase", coin: "Ethereum"}];
+    arr_coinbase = [{api: 'BTC-USD', platform: 'Coinbase', coin: 'Bitcoin'},{api: 'ETH-USD', platform: 'Coinbase', coin: 'Ethereum'}];
 
     #bittrex platform
-    arr_bittrex = [{api: "usdt-btc", platform: "Bittrex", coin: "Bitcoin"},{api: "usdt-eth", platform: "Bittrex", coin: "Ethereum"}];
+    arr_bittrex = [{api: 'usdt-btc', platform: 'Bittrex', coin: 'Bitcoin'},{api: 'usdt-eth', platform: 'Bittrex', coin: 'Ethereum'}];
 
     arr_coinbase.each do |arr|
       _price = request_data_basecoin(arr[:api])
@@ -145,26 +144,6 @@ class Price < ApplicationRecord
     end
     return prices
   end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
   def self.request_data_basecoin(currency)
@@ -193,6 +172,4 @@ class Price < ApplicationRecord
     worth = response.parsed_response['bids'].first['0']
     return worth
   end
-
-
 end
