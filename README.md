@@ -10,6 +10,10 @@ from
 
 ## User Stories
 ## How to start:
+**step 0**
+
+- install: postgres, rails, ruby, elasticsearch, redis, rabbitMQ.
+
 **step 1**
 
 - git clone https://github.com/Sunnyvo/frontendcoinapp for frontend.
@@ -22,13 +26,15 @@ from
   + rails db:drop db:create db:migrate db:seed
   + config .env file with CLOUDAMQPURL=""
 
-- Start these servers and workers below
+  + **Start these servers and workers below**
   + web: rails server -p 3000
   + redis: redis-server
   + worker: QUEUE=update_price rake resque:work
   + worker: QUEUE=update_chart rake resque:work
   + worker: QUEUE=queue_chart rake resque:work
   + job_fetch_price: rake resque:scheduler
+
+
 
 - Frontend
   + npm install ( redependencies)
