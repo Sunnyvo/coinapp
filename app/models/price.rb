@@ -18,7 +18,6 @@ class Price < ApplicationRecord
       coins= []
       coins << Price.data_for_each_coin(1, platform.id)
       coins << Price.data_for_each_coin(2, platform.id)
-      binding.dry
       platforms << coins
     end
     return platforms
@@ -33,7 +32,7 @@ class Price < ApplicationRecord
           by_times: {
             date_histogram: {
               field: :created_at,
-              interval: '5m',
+              interval: '4h',
               min_doc_count: 1,
             },
             #

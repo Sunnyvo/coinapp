@@ -19,6 +19,14 @@ coins_list.each do |coin|
   Coin.create!(name: coin)
 end
 
-20.times do
-  Price.create!(worth: rand(2000),platform_id: rand(1..3),coin_id: rand(1..2))
+time =Time.now - 2.days
+1000.times do
+  Price.create!(worth: rand(11000.111...16000.11),platform_id: rand(1..3),coin_id: 1, created_at: time)
+  time = time +150
+end
+
+time2=Time.now - 2.days
+1000.times do
+  Price.create!(worth: rand(800.00...1000.11),platform_id: rand(1..3),coin_id: 2, created_at: time2)
+  time2 = time2 +150
 end
