@@ -48,4 +48,11 @@ class PricesController < ApplicationController
     prices = Price.where(platform_id: params[:platform], coin_id: params[:coin]).order('updated_at DESC').limit(5)
     render json: prices.to_json
   end
+
+
+  def index
+    @platforms = Price.data_of_platform_market
+    
+  end
+
 end

@@ -32,7 +32,7 @@ class Price < ApplicationRecord
           by_times: {
             date_histogram: {
               field: :created_at,
-              interval: '4h',
+              interval: '30m',
               min_doc_count: 1,
             },
             #

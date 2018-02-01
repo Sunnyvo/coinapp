@@ -27,6 +27,8 @@ gem 'jbuilder', '~> 2.5'
 # gem for coinbaserails
 gem 'httparty'
 gem 'coinbase'
+gem 'json'
+
 gem 'coinbase-exchange'
 # Use Redis adapter to run Action Cable in production
 gem 'redis', '~> 3.0'
@@ -43,6 +45,8 @@ gem 'oj'
 gem 'hashie'
 gem 'dotenv-rails', require: 'dotenv/rails-now'
 gem 'rubocop', require: false
+gem 'sneakers'
+gem  'sidekiq'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

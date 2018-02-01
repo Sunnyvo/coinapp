@@ -5,7 +5,6 @@ class ChartJob
       puts "chart job"
       begin
         # connection = Bunny.new ENV['CLOUDAMQPURL']
-
         connection = Bunny.new(host: 'localhost')
         connection.start
       rescue Bunny::TCPConnectionFailed => e
