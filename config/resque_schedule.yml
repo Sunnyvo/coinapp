@@ -1,17 +1,17 @@
-fetch_current_price:
-  every: 60s
-  class: PriceJob
-  args:
-  description: Grabs newest prices from public API of Coinbase, Bittrex & Bitfinex
+# fetch_current_price:
+#   every: 60s
+#   class: PriceJob
+#   args:
+#   description: Grabs newest prices from public API of Coinbase, Bittrex & Bitfinex
 
-update_current_chart:
-  every: 60s
-  class: ChartJob
-  args:
-  description: chart for all market platform
+# update_current_chart:
+#   every: 60s
+#   class: ChartJob
+#   args:
+#   description: chart for all market platform
 
 queue_current_chart:
-  every: 60s
+  every: 5s
   class: RabbitmqJob
   args:
   description: queue the chart
