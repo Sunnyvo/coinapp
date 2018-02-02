@@ -11,7 +11,7 @@ class Chartupdate
     puts 'hi1111111111111111111111111111111111111'
     payload = JSON.parse(msg)
     puts 'hi2222222222222222222222222222222222222'
-    binding.pry
+    # binding.pry
     ActionCable.server.broadcast 'prices', data: payload
     puts '3'
     ack!

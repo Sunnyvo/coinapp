@@ -9,6 +9,7 @@ require 'multi_json'
 MultiJson.use :yajl
 module Coinapp
   class Application < Rails::Application
+    config.active_job.queue_adapter = :sneakers
     config.middleware.insert_before 0, Rack::Cors do
       allow do
         origins '*'
