@@ -128,8 +128,7 @@ class Price < ApplicationRecord
     arr_coinbase = [{api: 'BTC-USD', platform: 'Coinbase', coin: 'Bitcoin'},{api: 'ETH-USD', platform: 'Coinbase', coin: 'Ethereum'}];
 
     #bittrex platform
-    arr_bittrex = [{api: '
-    , platform: 'Bittrex', coin: 'Bitcoin'},{api: 'usdt-eth', platform: 'Bittrex', coin: 'Ethereum'}];
+    arr_bittrex = [{api: 'usdt-btc', platform: 'Bittrex', coin: 'Bitcoin'},{api: 'usdt-eth', platform: 'Bittrex', coin: 'Ethereum'}];
 
     arr_coinbase.each do |arr|
       _price = request_data_basecoin(arr[:api])

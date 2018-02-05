@@ -1,4 +1,4 @@
-class ChartJob
+class ChartJob 
   @queue = :update_chart
   def self.perform
     begin
