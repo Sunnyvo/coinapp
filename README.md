@@ -22,27 +22,51 @@ from
 **step 2**
 
 - Systemd
-  + cd path/to/systemd/system (cmd: cd lib/systemd/system)
-  + create a updatechart.service (cmd: vim updatechart.service)
 
+  + cd path/to/systemd/system:
+  ```shell-session
+    $ cd lib/systemd/system
+  ```
+
+  + Create a updatechart.service:
+  ```shell-session
+    $ vim updatechart.service
+  ```
+
+  + Add the code below inside the file and save it (notice the WorkingDirectory and your ExecStart):
 ``` ruby
-[Unit]
-Description=Resque queuechartjobs
-After=redis.service
+    [Unit]
+    Description=Resque queuechartjobs
+    After=redis.service
 
-[Service]
-Type=simple
-WorkingDirectory=/home/testing/Documents/testrails/coinapp
-User=testing
-ExecStart=/home/testing/.rbenv/shims/bundle exec rake resque:work QUEUE=queue_chart
-Restart=always
-[Install]
-WantedBy=multi-user.target
+    [Service]
+    Type=simple
+    WorkingDirectory=/home/testing/Documents/testrails/coinapp
+    User=testing
+    ExecStart=/home/testing/.rbenv/shims/bundle exec rake resque:work QUEUE=queue_chart
+    Restart=always
+    [Install]
+    WantedBy=multi-user.target
 ```
+  + start your service:
+  ```shell-session
+    $ systemctl start queuechart.service
+  ```
 
+  + check the status of service:
+  ```shell-session
+    $ systemctl start queuechart.service
+  ```
 
+  + check the log of your service:
+  ```shell-session
+    $ journalctl -xe
+  ```
 
-
+  + stop your service
+  ```shell-session
+    $ systemctl stop queuechart.service
+  ```
 
 - Backend
   + bundle (update gem)
