@@ -1,6 +1,6 @@
 
   i = 0
-  json.platforms @platforms do |coins|
+  json.platforms platforms do |coins|
     if(coins != nil)
       json.id (i=i+1)
       json.name Platform.find_by_id(i).name

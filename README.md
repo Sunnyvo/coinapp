@@ -21,6 +21,28 @@ from
 
 **step 2**
 
+- Systemd
+  + cd path/to/systemd/system (cmd: cd lib/systemd/system)
+  + create a updatechart.service (cmd: vim updatechart.service)
+
+[Unit]
+Description=Resque queuechartjobs
+After=redis.service
+
+[Service]
+Type=simple
+WorkingDirectory=/home/testing/Documents/testrails/coinapp
+User=testing
+ExecStart=/home/testing/.rbenv/shims/bundle exec rake resque:work QUEUE=queue_chart
+Restart=always
+[Install]
+WantedBy=multi-user.target
+
+
+
+
+
+
 - Backend
   + bundle (update gem)
   + rails db:drop db:create db:migrate db:seed
@@ -30,7 +52,6 @@ from
   + web: rails server -p 3000
   + redis: redis-server
   + worker: QUEUE=update_price rake resque:work
-  + worker: QUEUE=update_chart rake resque:work
   + worker: QUEUE=queue_chart rake resque:work
   + job_fetch_price: rake resque:scheduler
 

@@ -1,6 +1,6 @@
 # open connections
 # wait and listen to message.
-class RabbitmqJob 
+class RabbitmqJob
   @queue = :queue_chart
   def self.perform
 
@@ -18,7 +18,6 @@ class RabbitmqJob
     exchange = channel.direct('chartexchange', :durable => true, :auto_delete => false)
 
     queue.bind(exchange, :routing_key => 'update_chart')
-    puts data
     exchange.publish(data,
       :timestamp      => Time.now.to_i,
       :routing_key    => "update_chart"

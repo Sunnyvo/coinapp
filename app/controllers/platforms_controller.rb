@@ -23,7 +23,7 @@ class PlatformsController < ApplicationController
   end
 
   def index
-    @platforms = Platform.all
+    @platforms = Price.data_of_platform_market
   end
 
 

@@ -1,4 +1,4 @@
-class ChartJob 
+class ChartJob
   @queue = :update_chart
   def self.perform
     begin
@@ -14,8 +14,6 @@ class ChartJob
       channel = connection.create_channel
       queue = channel.queue('chartqueue', :durable => true, :auto_delete => false)
       queue.subscribe(manual_ack: true ,block: true) do |delivery_info, properties, payload|
-        puts "properties:"
-        puts properties
         ActionCable.server.broadcast 'prices', data: payload
         msg_cnt = queue.message_count()
         if (msg_cnt == 0)
