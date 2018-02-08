@@ -36,26 +36,26 @@ from
   + Add the code below inside the file and save it (notice the WorkingDirectory and your ExecStart):
 ``` ruby
     [Unit]
-    Description=Resque queuechartjobs
+    Description=Resque updatechartjobs
     After=redis.service
 
     [Service]
     Type=simple
     WorkingDirectory=/home/testing/Documents/testrails/coinapp
     User=testing
-    ExecStart=/home/testing/.rbenv/shims/bundle exec rake resque:work QUEUE=queue_chart
+    ExecStart=/home/testing/.rbenv/shims/bundle exec rake resque:work QUEUE=update_chart
     Restart=always
     [Install]
     WantedBy=multi-user.target
 ```
   + start your service:
   ```shell-session
-    $ systemctl start queuechart.service
+    $ systemctl start updatechart.service
   ```
 
   + check the status of service:
   ```shell-session
-    $ systemctl start queuechart.service
+    $ systemctl start updatechart.service
   ```
 
   + check the log of your service:
@@ -65,7 +65,7 @@ from
 
   + stop your service
   ```shell-session
-    $ systemctl stop queuechart.service
+    $ systemctl stop updatechart.service
   ```
 
 - Backend
