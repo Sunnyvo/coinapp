@@ -25,6 +25,7 @@ from
   + cd path/to/systemd/system (cmd: cd lib/systemd/system)
   + create a updatechart.service (cmd: vim updatechart.service)
 
+``` ruby
 [Unit]
 Description=Resque queuechartjobs
 After=redis.service
@@ -37,7 +38,7 @@ ExecStart=/home/testing/.rbenv/shims/bundle exec rake resque:work QUEUE=queue_ch
 Restart=always
 [Install]
 WantedBy=multi-user.target
-
+```
 
 
 
